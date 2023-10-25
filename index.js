@@ -37,7 +37,7 @@ io.on('connection', (socket) => {
 
       // Handle file uploads within a room
   socket.on('file-upload', (data) => {
-    console.log(`Received file: ${data.name}`);
+    console.log(`Received file: ${data.name}`,data);
     // Broadcast the file data to all users in the room
     socket.broadcast.to(data.room).emit('file-received', data)
     // io.to(data.room).emit('file-received', data);
