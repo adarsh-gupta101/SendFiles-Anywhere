@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
+    <script src="https://cdn.tailwindcss.com"></script>
+
     <title>File Sharing App</title>
-    <style>
+    <!-- <style>
         body {
             background-color: #f5f5f5; /* Light background color */
             color: #333; /* Dark text color */
@@ -72,9 +74,9 @@
         #files, #file-data {
             margin-top: 20px;
         }
-    </style>
-</head>
-<body>
+    </style> -->
+  </head>
+  <!-- <body>
     <div class="container">
         <h1>File Sharing App</h1>
         <form id="upload-form" method="POST" enctype="multipart/form-data">
@@ -100,5 +102,115 @@
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="/client.js"></script>
-</body>
+</body> -->
+
+  <style>
+    .file-input {
+      background-color: #fff;
+      color: #333;
+      border: 2px solid #ccc;
+      padding: 10px;
+      width: 100%;
+      transition: border 0.3s, box-shadow 0.3s;
+    }
+
+    .file-input:hover {
+      border: 2px solid #805ad5; /* Purple accent color on hover */
+      box-shadow: 0 0 5px 0 rgba(128, 90, 213, 0.5);
+    }
+
+    .btn-purple {
+      background-color: #805ad5;
+      color: #fff;
+      padding: 10px 20px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .btn-purple:hover {
+      background-color: #6a41a0; /* Slightly darker purple on hover */
+    }
+
+    .message-input {
+      background-color: #fff;
+      color: #333;
+      border: 2px solid #ccc;
+      padding: 10px;
+      width: 100%;
+      transition: border 0.3s, box-shadow 0.3s;
+    }
+
+    .message-input:hover {
+      border: 2px solid #805ad5; /* Purple accent color on hover */
+      box-shadow: 0 0 5px 0 rgba(128, 90, 213, 0.5);
+    }
+  </style>
+  <body
+    class="bg-purple-100 text-gray-800 font-sans text-center min-h-screen flex flex-col justify-center"
+  >
+    <div class="container mx-auto p-4">
+      <h1 class="text-3xl font-bold text-purple-700 mb-4">File Sharing App</h1>
+      <form id="upload-form" method="POST" enctype="multipart/form-data">
+        <input
+          type="file"
+          id="file-input"
+          name="file"
+          class="file-input mb-4"
+        />
+        <button
+          type="submit"
+          class="bg-purple-600 text-white rounded-full px-6 p-4 mb-4"
+        >
+          Upload
+        </button>
+      </form>
+
+      <form
+        onsubmit="return false"
+        class="mb-4 flex flex-col flex-wrap sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-2 justify-center"
+      >
+        <input
+          id="room-input"
+          placeholder="Enter room name"
+          class="message-input w-full mb-8"
+        />
+        <button
+          onclick="alert(`You have joined ${document.getElementById('room-input').value}`);createRoom(document.getElementById('room-input').value)"
+          class="rounded-full bg-purple-800 text-white p-4 px-6 hover:bg-purple-700 transition duration-300 ease-in-out mb-4 sm:mb-0 sm:mr-2"
+        >
+          Create Room
+        </button>
+        <button
+          onclick="alert(`You have joined ${document.getElementById('room-input').value}`);joinRoom(document.getElementById('room-input').value)"
+          class="rounded-full bg-purple-800 text-white p-4 px-6 hover:bg-purple-700 transition duration-300 ease-in-out mb-4 sm:mb-0 sm:mr-2"
+        >
+          Join Room
+        </button>
+      </form>
+
+      <div>
+        <div
+          id="messages"
+          class="bg-white p-2 max-h-200 overflow-y-auto border border-gray-400 mb-4"
+        ></div>
+        <input
+          id="message-input"
+          placeholder="Enter a message"
+          class="message-input mb-2"
+        />
+        <button
+          onclick="sendMessage(document.getElementById('room-input').value, document.getElementById('message-input').value)"
+          class="btn-purple"
+        >
+          Send Message
+        </button>
+      </div>
+
+      <div id="files" class="mt-4"></div>
+      <div id="file-data"></div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/client.js"></script>
+  </body>
 </html>
